@@ -2,6 +2,7 @@
 
 var ctx = document.getElementById('myChart').getContext("2d");
 var datasets = []
+
 var dataset1 ={
     fill: false,
     label: "Curve0",
@@ -15,6 +16,7 @@ var dataset1 ={
 }
 
 datasets.push(dataset1)
+
 
 var oi = new Chart(ctx, {
     type: 'line',
@@ -52,12 +54,11 @@ function addCurve(input) {
         label: "Curve"+index,
         data: data
     }
-    if (index <= total) {
+    if (datasets.map(i=>i['label']).includes(set.label) )
+    {
         datasets.forEach(curve => {
-            console.log(curve["label"]+" "+set["label"])
             if (curve["label"] == set["label"]) {
                 curve.data = data
-                console.log("remplacé ?")
             }
         })
     } else {
