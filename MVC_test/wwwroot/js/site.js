@@ -1,13 +1,10 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿////const { parseJSON } = require("jquery");
 
 var ctx = document.getElementById('myChart').getContext("2d");
 var datasets = []
 var dataset1 ={
     fill: false,
-    label: "Oi from JS",
+    label: "Curve0",
     data: [{
         x: 7,
         y: 5
@@ -15,17 +12,6 @@ var dataset1 ={
         x: 19,
         y: -1
     }]
-}
-var dataset2 = {
-    fill: false,
-    label: "Oi from JS 2",
-    data: [{
-        x: 0,
-        y: 7
-    }, {
-        x: 11,
-        y: 9
-    }]   
 }
 
 datasets.push(dataset1)
@@ -50,21 +36,45 @@ var oi = new Chart(ctx, {
         }
     }
 });
-function addEntry() {
-    
-}
-addLine = () => {
-    datasets.push(dataset2)
+function addCurve(input) {
+    let index = input.parentNode.id.slice(-1)
+    let listT = []
+    for (i = 0; i < 100; i++) {
+        listT.push(i*0.1)
+    }
+    data=[]
+    listT.forEach(t => {
+        data.push({ x: eval(document.getElementById("X" + index).value), y: eval(document.getElementById("Y" + index).value)})
+    })
+
+    var set = {
+        fill: false,
+        label: "Curve"+index,
+        data: data
+    }
+    if (index <= total) {
+        datasets.forEach(curve => {
+            console.log(curve["label"]+" "+set["label"])
+            if (curve["label"] == set["label"]) {
+                curve.data = data
+                console.log("remplacé ?")
+            }
+        })
+    } else {
+        datasets.push(set)
+    }
     oi.update()
 }
-var i=0
+
+
+
+var total=0
 function duplicate() {
-    var original = document.getElementById('curve' + i);
-    i++;
-    var clone = original.cloneNode(true); // "deep" clone
-    clone.children[0].children[0].id = "X" + i
-    clone.children[1].children[0].id = "Y" + i
-    clone.id = "curve" + i; // there can only be one element with an ID
-    //clone.onclick = duplicate; // event handlers are not cloned
+    var original = document.getElementById('curve' + total);
+    total++;
+    var clone = original.cloneNode(true); 
+    clone.children[0].children[0].id = "X" + total
+    clone.children[1].children[0].id = "Y" + total
+    clone.id = "curve" + total; 
     original.parentNode.appendChild(clone);
 }

@@ -18,24 +18,15 @@ namespace MVC_test.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            //ListCurve = new List<Curve>();
-            //ListCurve.Add(new Curve(1));
+
         }
 
         public IActionResult Index()
         {
-            //ViewBag.ListCurve = this.ListCurve;
-            //ViewBag.TotalCurve = 1;
-            //ListCurves ListCurve = new ListCurves();
-            //ListCurve.AddCurve(0);
+
             return View();
         }
 
-        //public void AddEntry()
-        //{
-        //    this.ListCurve.Add(new Curve(2));
-        //    ViewBag.ListCurve = this.ListCurve;
-        //}
         public IActionResult Privacy()
         {
             return View();
