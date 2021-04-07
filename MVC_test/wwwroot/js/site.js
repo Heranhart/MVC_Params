@@ -6,6 +6,7 @@ var datasets = []
 var dataset1 ={
     fill: false,
     label: "Curve0",
+    borderColor:"#ff6384",
     data: [{
         x: 7,
         y: 5
@@ -24,7 +25,12 @@ var oi = new Chart(ctx, {
         datasets:datasets
     },
     options: {
-        stacked:true,
+        elements: {
+            point: {
+                radius: 1
+            }
+        },
+        stacked: true,
         animation: {
             duration: 0
         },
@@ -44,9 +50,22 @@ function addCurve(input) {
     for (i = 0; i < 100; i++) {
         listT.push(i*0.1)
     }
+    regex = /([,.()/+\-*])/g
+    xt = document.getElementById("X" + index).value.split(regex)
+    for (i = 0; i < xt.length; i++) {
+        if (Math[xt[i]] != undefined) { xt[i] = "Math." + xt[i] }
+    }
+    xt = xt.join('')
+
+    yt = document.getElementById("Y" + index).value.split(regex)
+    for (i = 0; i < yt.length; i++) {
+        if (Math[yt[i]] != undefined) { yt[i] = "Math." + yt[i] }
+    }
+    yt = yt.join('')
+
     data=[]
     listT.forEach(t => {
-        data.push({ x: eval(document.getElementById("X" + index).value), y: eval(document.getElementById("Y" + index).value)})
+        data.push({ x: eval(xt), y: eval(yt)})
     })
 
     var set = {

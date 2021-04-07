@@ -7,6 +7,17 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+canvas {
+    width:inherit;
+}
+
+.chart {
+    width:60%;
+    display: flex;
+    justify-content: center;
+    justify-self:center;
+    
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -38,7 +49,7 @@ html {
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
-.border-bottom {
+.border-bottom {con
   border-bottom: 1px solid #e5e5e5;
 }
 
